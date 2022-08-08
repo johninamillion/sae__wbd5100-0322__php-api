@@ -71,6 +71,7 @@ final class Error extends Controller {
         $this->Response->setContentType( 'application/json' );
         $this->Response->setResponseCode( $status );
         $this->Response->printJSON( [ 'error' => [ 'code' => $status, 'message' => self::getMessage( $status ) ] ] );
+        exit();
     }
 
 }
