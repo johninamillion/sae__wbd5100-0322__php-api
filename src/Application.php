@@ -128,6 +128,7 @@ final class Application {
      * @construct
      */
     public function __construct() {
+        Session::start();
         $this->url = $this->parseUrl();
     }
 
