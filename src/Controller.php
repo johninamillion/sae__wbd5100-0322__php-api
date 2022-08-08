@@ -7,10 +7,10 @@ abstract class Controller {
     /**
      * Response
      *
-     * @access  private
+     * @access  protected
      * @var     Response|NULL
      */
-    private ?Response $Response = NULL;
+    protected ?Response $Response = NULL;
 
     /**
      * Constructor
@@ -20,6 +20,7 @@ abstract class Controller {
      */
     public function __construct() {
         $this->Response = new Response();
+        $this->Response->setContentType( 'application/json' );
     }
 
 }
