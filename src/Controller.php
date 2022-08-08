@@ -13,6 +13,14 @@ abstract class Controller {
     protected ?Response $Response = NULL;
 
     /**
+     * Request
+     *
+     * @access  protected
+     * @var     Request|NULL
+     */
+    protected ?Request $Request = NULL;
+
+    /**
      * Constructor
      *
      * @access  public
@@ -20,6 +28,9 @@ abstract class Controller {
      */
     public function __construct() {
         $this->Response = new Response();
+        $this->Request = new Request();
+
+        // set default content-type
         $this->Response->setContentType( 'application/json' );
     }
 
