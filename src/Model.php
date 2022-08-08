@@ -47,7 +47,7 @@ abstract class Model {
      * @return  void
      */
     public function addError( string $key, string $error ) : void {
-        $this->errors[ $key ] = $error;
+        $this->errors[ $key ][] = $error;
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class Model {
      * @return  void
      */
     public function addMessage( string $key, string $message ) : void {
-        $this->messages[ $key ] = $message;
+        $this->messages[ $key ][] = $message;
     }
 
 }
