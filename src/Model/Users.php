@@ -41,6 +41,25 @@ final class Users extends Model {
     }
 
     /**
+     * Get credentials by username
+     *
+     * @access  private
+     * @param   string|NULL $username
+     * @return  array|bool
+     */
+    private function getCredentialsByUsername( ?string $username ) : array|bool {
+        /** @var string $query */
+        $query = 'SELECT id, password, salt FROM users WHERE username = :username;';
+
+        /** @var \PDOStatement $Statement */
+        $Statement = $this->Database->prepare( $query );
+        $Statement->bindValue( ':username', $username );
+        $Statement->execute();
+
+        return $Statement->fetch();
+    }
+
+    /**
      * Hash password
      *
      * @access  private
@@ -155,6 +174,32 @@ final class Users extends Model {
         }
 
         return !$this->hasErrors( 'username' );
+    }
+
+    /**
+     * Login User
+     *
+     * @access  public
+     * @param   string|NULL $username
+     * @param   string|NULL $password
+     * @return  bool
+     */
+    public function loginUser( ?string $username, ?string $password ) : bool {
+        /** @var array|bool $credentials */
+        $credentials = $this->getCredentialsByUsername( $username );
+
+        if ( $credentials ) {
+            /** @var string $hashed_password */
+            $hashed_password = $this->hashPassword( $password, $credentials[ 'salt' ] );
+
+            if ( $hashed_password === $credentials[ 'password' ] ) {
+                // Todo: finalize login
+
+                return TRUE;
+            }
+        }
+
+        return FALSE;
     }
 
     /**

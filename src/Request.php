@@ -4,6 +4,7 @@ namespace SAE\PHPAPI;
 
 final class Request {
 
+    const METHOD_DELETE = 'DELETE';
     const METHOD_GET    = 'GET';
     const METHOD_POST   = 'POST';
 
