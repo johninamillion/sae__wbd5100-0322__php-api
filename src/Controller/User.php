@@ -13,6 +13,7 @@ final class User extends Controller {
      * @return  void
      */
     public function register() : void {
+
     }
 
 }
