@@ -127,7 +127,7 @@ final class Users extends Model {
             $this->addError( 'password', _( 'The password doesn\'t match with the repeated password' ) );
         }
 
-        return $this->hasErrors( 'password' );
+        return !$this->hasErrors( 'password' );
     }
 
     /**
@@ -154,7 +154,7 @@ final class Users extends Model {
             $this->addError( 'username', _( 'The username contains whitespace' ) );
         }
 
-        return $this->hasErrors( 'username' );
+        return !$this->hasErrors( 'username' );
     }
 
     /**
