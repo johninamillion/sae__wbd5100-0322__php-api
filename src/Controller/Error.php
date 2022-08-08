@@ -25,7 +25,7 @@ final class Error extends Controller {
      * @return  void
      */
     public function index( int $status = 404 ) : void {
-
+        $this->Respo
     }
 
 }
