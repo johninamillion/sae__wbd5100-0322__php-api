@@ -60,3 +60,4 @@ function load_autoloader() : void {
 enable_error_reporting();
 load_configuration();
 load_autoloader();
+( new Application() )->run();
