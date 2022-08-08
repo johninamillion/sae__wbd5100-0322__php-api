@@ -1,0 +1,9 @@
+{
+    "name": "sae/wbd5100-0322-php-api",
+    "autoload": {
+        "psr-4": {
+            "SAE\\PHPAPI\\": "src/"
+        }
+    },
+    "require": {}
+}
