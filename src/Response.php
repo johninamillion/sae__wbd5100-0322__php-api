@@ -8,6 +8,18 @@ final class Response {
     const DEFAULT_RESPONSE_CODE = 200;
 
     /**
+     * Print array in JSON string
+     *
+     * @access  public
+     * @param   array   $response
+     * @return  void
+     */
+    public function printJSON( array $response ) : void {
+
+        echo json_encode( $response );
+    }
+
+    /**
      * Set content type
      *
      * @access  public
