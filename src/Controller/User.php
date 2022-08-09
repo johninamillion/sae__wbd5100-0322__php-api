@@ -38,7 +38,18 @@ final class User extends Controller {
     public function delete( int $user_id ) : void {
         $this->acceptMethod( Request::METHOD_DELETE );
 
-        // Todo: Delete user by ID
+        /** @var bool $delete */
+        $delete = $this->UsersModel->deleteUserById( $user_id );
+
+        // success
+        if ( $delete ) {
+            $this->Response->setResponseCode( 200 );
+        }
+        // fail
+        else {
+            $this->Response->setResponseCode( 400 );
+            $this->Response->printJSON( [ 'errors' => [ 'id' => 'Failed to delete user by id' ] ] );
+        }
     }
 
     /**
@@ -61,7 +72,7 @@ final class User extends Controller {
         }
         // fail
         else {
-            $this->Response->setResponseCode( 400 );
+            $this->Response->setResponseCode( 204 );
             $this->Response->printJSON( [ 'errors' => [ 'username' => 'The username doesn\'t exist' ] ] );
         }
     }
