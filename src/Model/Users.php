@@ -177,6 +177,29 @@ final class Users extends Model {
     }
 
     /**
+     * Get profile by Username
+     *
+     * @access  public
+     * @param   string  $username
+     * @return  array|bool
+     */
+    public function getProfileByUsername( string $username ) : array|bool {
+        if ( $this->usernameExists( $username ) ) {
+            /** @var string $query */
+            $query = 'SELECT id, username, email, registered FROM users WHERE username = :username;';
+
+            /** @var \PDOStatement $Statement */
+            $Statement = $this->Database->prepare( $query );
+            $Statement->bindValue( ':username', $username );
+            $Statement->execute();
+
+            return $Statement->fetch();
+        }
+
+        return FALSE;
+    }
+
+    /**
      * Login User
      *
      * @access  public
