@@ -42,6 +42,31 @@ final class User extends Controller {
     }
 
     /**
+     * Profile
+     *
+     * @access  public
+     * @param   string  $username
+     * @return  void
+     */
+    public function profile( string $username ) : void {
+        $this->acceptMethod( Request::METHOD_GET );
+
+        /** @var array|bool $profile */
+        $profile = $this->UsersModel->getProfileByUsername( $username );
+
+        // success
+        if ( $profile ) {
+            $this->Response->setResponseCode( 200 );
+            $this->Response->printJSON( $profile );
+        }
+        // fail
+        else {
+            $this->Response->setResponseCode( 400 );
+            $this->Response->printJSON( [ 'errors' => [ 'username' => 'The username doesn\'t exist' ] ] );
+        }
+    }
+
+    /**
      * Login
      *
      * @access  public
