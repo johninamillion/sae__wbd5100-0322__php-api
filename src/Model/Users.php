@@ -73,6 +73,25 @@ final class Users extends Model {
     }
 
     /**
+     * Check if an user id exists
+     *
+     * @access  private
+     * @param   int|NULL    $user_id
+     * @return  bool
+     */
+    private function userIdExists( ?int $user_id ) : bool {
+        /** @var string $query */
+        $query = 'SELECT id FROM users WHERE id = :id;';
+
+        /** @var \PDOStatement $Statement */
+        $Statement = $this->Database->prepare( $query );
+        $Statement->bindValue( ':id', $user_id );
+        $Statement->execute();
+
+        return $Statement->rowCount() > 0;
+    }
+
+    /**
      * Check if an username exists
      *
      * @access  private
@@ -174,6 +193,29 @@ final class Users extends Model {
         }
 
         return !$this->hasErrors( 'username' );
+    }
+
+    /**
+     * Delete user
+     *
+     * @access  public
+     * @param   int     $user_id
+     * @return  bool
+     */
+    public function deleteUserById( int $user_id ) : bool {
+        if ( $this->userIdExists( $user_id ) ) {
+            /** @var string $query */
+            $query = 'DELETE FROM users WHERE id = :id;';
+
+            /** @var \PDOStatement $Statement */
+            $Statement = $this->Database->prepare( $query );
+            $Statement->bindValue( ':id', $user_id );
+            $Statement->execute();
+
+            return $Statement->rowCount() > 0;
+        }
+
+        return FALSE;
     }
 
     /**
